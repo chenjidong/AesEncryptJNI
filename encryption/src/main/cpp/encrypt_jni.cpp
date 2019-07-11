@@ -1,11 +1,18 @@
 //
 // Created by chenjidong on 2019/7/10.
 //
-#include "encrypt_jni.h"
+#include <jni.h>
+#include <cstring>
+#include <sstream>
+
+extern "C" {
+#include "check_signature.h"
+#include "aes.h"
+}
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_cjd_jniencryption_utils_EncryptJNI_checkSignature(JNIEnv *env, jclass type,
+Java_com_cjd_encryption_EncryptJNI_checkSignature(JNIEnv *env, jclass type,
                                                            jobject context) {
 
     return check_signature(env, context);
@@ -13,7 +20,7 @@ Java_com_cjd_jniencryption_utils_EncryptJNI_checkSignature(JNIEnv *env, jclass t
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_cjd_jniencryption_utils_EncryptJNI_encode(JNIEnv *env, jclass type, jobject context,
+Java_com_cjd_encryption_EncryptJNI_encode(JNIEnv *env, jclass type, jobject context,
                                                    jstring str_) {
     uint8_t *AES_KEY = (uint8_t *) getAesKey();
     const char *in = env->GetStringUTFChars(str_, JNI_FALSE);
@@ -28,7 +35,7 @@ Java_com_cjd_jniencryption_utils_EncryptJNI_encode(JNIEnv *env, jclass type, job
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_cjd_jniencryption_utils_EncryptJNI_decode(JNIEnv *env, jclass type, jobject context,
+Java_com_cjd_encryption_EncryptJNI_decode(JNIEnv *env, jclass type, jobject context,
                                                    jstring str_) {
     uint8_t *AES_KEY = (uint8_t *) getAesKey();
     const char *str = env->GetStringUTFChars(str_, JNI_FALSE);
@@ -41,13 +48,13 @@ Java_com_cjd_jniencryption_utils_EncryptJNI_decode(JNIEnv *env, jclass type, job
 }
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_cjd_jniencryption_utils_EncryptJNI_checkPackage(JNIEnv *env, jclass type,
+Java_com_cjd_encryption_EncryptJNI_checkPackage(JNIEnv *env, jclass type,
                                                          jobject context) {
     return check_package(env, context);
 }
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_cjd_jniencryption_utils_EncryptJNI_checkWhileList(JNIEnv *env, jclass type,
+Java_com_cjd_encryption_EncryptJNI_checkWhileList(JNIEnv *env, jclass type,
                                                            jobject context) {
     return check_white_list(env, context);
 }

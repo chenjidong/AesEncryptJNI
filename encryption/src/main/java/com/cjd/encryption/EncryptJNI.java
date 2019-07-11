@@ -1,4 +1,4 @@
-package com.cjd.jniencryption.utils;
+package com.cjd.encryption;
 
 /**
  * @Author chenjidong
@@ -18,7 +18,6 @@ public class EncryptJNI {
      * @return 1 : pass ， -1 or  -2 : error.
      */
     public static native int checkSignature(Object context);
-
 
     public static native int checkPackage(Object context);
 

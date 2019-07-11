@@ -10,7 +10,8 @@ cmake_minimum_required(VERSION 3.4.1)
 # You can define multiple libraries, and CMake builds them for you.
 # Gradle automatically packages shared libraries with your APK.
 
-
+#设置生成的so动态库最后输出的路径 注意：（声明输出路径必须配置 jniLibs.srcDirs 到 build中 否则冲突）
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/../jniLibs/${ANDROID_ABI})
 
 add_library( # Sets the name of the library.
         encrypt-lib
@@ -19,7 +20,6 @@ add_library( # Sets the name of the library.
         SHARED
 
         # Provides a relative path to your source file(s).
-        encrypt_jni.h
         encrypt_jni.cpp
         aes.c
         aes.h

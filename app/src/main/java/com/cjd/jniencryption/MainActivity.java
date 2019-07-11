@@ -5,7 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
 
-import com.cjd.jniencryption.utils.EncryptJNI;
+import com.cjd.encryption.EncryptJNI;
 
 public class MainActivity extends AppCompatActivity {
 
