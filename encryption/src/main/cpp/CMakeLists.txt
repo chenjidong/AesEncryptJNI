@@ -27,6 +27,8 @@ add_library( # Sets the name of the library.
         base64.h
         check_signature.h
         check_signature.c
+        md5.h
+        md5.cpp
         )
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by

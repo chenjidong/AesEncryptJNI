@@ -16,15 +16,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
-        int value = EncryptJNI.checkPackage(getApplicationContext());
-        String text = "sakfjlskfjlaskdf";
-        Log.d("--->", "onCreate: " + text);
-        String encode = EncryptJNI.encode(getApplicationContext(), text);
-        Log.d("--->", "onCreate: " + encode);
-        String decode = EncryptJNI.decode(getApplicationContext(), encode);
-        Log.d("--->", "onCreate: " + decode);
-
-        tv.setText(value + "");
+        String text = "{\"中文\":\"汉字\",\"key\":\"value\"}";
+        Log.d("--->", "normal: " + text);
+        String encode = EncryptJNI.encrypt(text);
+        Log.d("--->", "encode: " + encode);
+        String decode = EncryptJNI.decrypt(encode);
+        Log.d("--->", "decode: " + decode);
+        int hashCode = EncryptJNI.getSignature(this);
+        Log.d("--->", "signature: " + hashCode);
+        tv.setText("hashCode:" + hashCode);
     }
 
 }

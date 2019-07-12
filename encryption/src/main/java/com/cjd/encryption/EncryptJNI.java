@@ -1,5 +1,10 @@
 package com.cjd.encryption;
 
+import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
+
 /**
  * @Author chenjidong
  * @email 374122600@qq.com
@@ -12,33 +17,66 @@ public class EncryptJNI {
     }
 
     /**
-     * 检查 打包签名是否 是正确的 防止被二次打包
+     * 检查包名
      *
-     * @param context
-     * @return 1 : pass ， -1 or  -2 : error.
+     * @return 1 成功
      */
-    public static native int checkSignature(Object context);
+    public static native int checkPackage();
 
-    public static native int checkPackage(Object context);
-
-    public static native int checkWhileList(Object context);
+    /**
+     * 检查 包名和签名是否正确
+     *
+     * @return 1成功
+     */
+    public static native int checkWhileList();
 
     /**
      * AES加密 AES128_ECB
      *
-     * @param context
-     * @param str
+     * @param bytes
      * @return
      */
-    public static native String encode(Object context, String str);
-
+    public static native String encode(byte[] bytes);
 
     /**
      * AES 解密 AES128_ECB
      *
-     * @param context
      * @param str
      * @return UNSIGNATURE ： sign not pass .
      */
-    public static native String decode(Object context, String str);
+    public static native byte[] decode(String str);
+
+    /**
+     * md5 加密  2次
+     *
+     * @param str
+     * @return
+     */
+    public static native String pwdMD5(String str);
+
+
+    public static String encrypt(String str) {
+        return encode(str.getBytes());
+    }
+
+    public static String decrypt(String str) {
+        return new String(decode(str));
+    }
+
+
+    /**
+     * 获取签名 hashCode
+     */
+    public static int getSignature(Context context) {
+        try {
+            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), PackageManager.GET_SIGNATURES);
+
+            Signature sign = packageInfo.signatures[0];
+            return sign.hashCode();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
 }

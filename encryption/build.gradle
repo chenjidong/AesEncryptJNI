@@ -54,7 +54,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
-task makeJar(type:Copy){
+task makeJar(type: Copy) {
     //如果之前存在，则先删除
     delete 'build/libs/encrypt.jar'
     //设置拷贝的文件

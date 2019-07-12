@@ -12,8 +12,13 @@
 
 //合法的APP包名
 static const char *app_package_names[] = {"com.cjd.jniencryption"};
-//合法的hashcode -625644214:这个值是我生成的这个可以store文件的hash值
-static const int app_signature_hash_code[] = {-625644214};
+//合法的hashcode
+static const int app_signature_hash_code[] = {820593836};
+
+static const uint8_t AES_KEY[] = "abcdef0123456789";
+static const uint8_t AES_IV[] = "KXTUDEdBs9zGlvy7";
+static const char* PWD_MD5_KEY = "4J9lKuR2c8OuDPBAniEy5USFQdSM0An4";
+
 
 /**
  * 校验APP 签名是否合法
