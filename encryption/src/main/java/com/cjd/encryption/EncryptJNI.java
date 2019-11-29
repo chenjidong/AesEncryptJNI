@@ -54,6 +54,12 @@ public class EncryptJNI {
      */
     public static native String pwdMD5(String str);
 
+    /**
+     * 自定义获取key
+     * @return
+     */
+    public static native String getSrKey();
+
 
     public static String encrypt(String str) {
         return encode(str.getBytes());

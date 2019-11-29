@@ -106,3 +106,10 @@ Java_com_cjd_encryption_EncryptJNI_pwdMD5(JNIEnv *env, jclass type, jstring out_
     env->ReleaseStringUTFChars(out_str, str);
     return env->NewStringUTF(("###" + result).data());//最后再加三个#
 }
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_cjd_encryption_EncryptJNI_getSrKey(JNIEnv *env, jclass type) {
+
+    return env->NewStringUTF(getSrKey());
+}

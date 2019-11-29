@@ -124,3 +124,8 @@ int hasSignature(int hashCode) {
     }
     return -2;
 }
+
+char *getSrKey(){
+    char *key = "C980DAF2E1ABE8329B0335DD419F96E1";
+    return key;
+}

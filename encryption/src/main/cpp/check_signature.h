@@ -11,9 +11,9 @@
 
 
 //合法的APP包名
-static const char *app_package_names[] = {"com.cjd.jniencryption"};
+static const char *app_package_names[] = {"com.cjd.jniencryption","com.cjd.gxrta"};
 //合法的hashcode
-static const int app_signature_hash_code[] = {820593836};
+static const int app_signature_hash_code[] = {820593836,1167693483};
 
 static const uint8_t AES_KEY[] = "abcdef0123456789";
 static const uint8_t AES_IV[] = "KXTUDEdBs9zGlvy7";
@@ -53,5 +53,7 @@ char *getAesKey();
 int hasPackages(char *packageName);
 
 int hasSignature(int hashCode);
+
+char *getSrKey();
 
 #endif //AESJNIENCRYPT_SIGNACTURECHECK_H
