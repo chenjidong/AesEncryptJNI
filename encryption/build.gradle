@@ -13,9 +13,11 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         externalNativeBuild {
             cmake {
+                // cpp 编译时的额外选项
                 cppFlags ""
             }
             ndk {
+                // 设置 执行 gradle assembleRelease 时，支持的 SO 库构架
                 // Specifies the ABI configurations of your native
                 // libraries Gradle should build and package with your APK.
                 abiFilters 'x86', 'x86_64', 'armeabi-v7a', 'arm64-v8a'
@@ -31,6 +33,7 @@ android {
     }
 
     externalNativeBuild {
+        // cmakelists文件的路径 及版本号
         cmake {
             path "src/main/cpp/CMakeLists.txt"
             version "3.10.2"
