@@ -33,7 +33,7 @@ add_library( # Sets the name of the library.
         base64.c
         base64.h
         check_signature.h
-        check_signature.c
+        check_signature.cpp
         md5.h
         md5.cpp
         )

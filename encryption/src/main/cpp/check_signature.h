@@ -1,10 +1,14 @@
 //
 // Created by chenjidong on 2019/7/10.
 //
-#include "base64.h"
 #include "android/log.h"
 #include <string.h>
 #include <jni.h>
+
+#include "aes.h"
+#include "md5.h"
+#include <cstring>
+#include <sstream>
 
 
 #ifndef JNIENCRYPTION_CHECK_SIGNATURE_H
@@ -16,7 +20,7 @@
 
 //合法的APP包名
 static const char *APP_PACKAGE_NAME[] = {"com.cjd.jniencryption", "com.cjd.gxrta"};
-//合法的hashcode
+//合法的jks hashcode
 static const int APP_SIGNATURE_HASH_CODE[] = {820593836, 1167693483};
 
 static const uint8_t AES_KEY[] = "abcdef0123456789";
@@ -37,14 +41,14 @@ jobject getApplication(JNIEnv *env);
  * @param env
  * @return JNI_OK
  */
-jint check_signature(JNIEnv *env);
+jint checkSignature(JNIEnv *env);
 
 /**
  * 检查包名是否合法
  * @param env
  * @return  JNI_OK
  */
-jint check_package(JNIEnv *env);
+jint checkPackage(JNIEnv *env);
 
 /**
  * 检查白名单
@@ -52,7 +56,7 @@ jint check_package(JNIEnv *env);
  * @param context 上下文
  * @return JNI_OK
  */
-jint check_white_list(JNIEnv *env);
+jint checkWhiteList(JNIEnv *env);
 
 /**
  * 判断是否匹配内置 包名
@@ -73,5 +77,36 @@ jint hasSignature(int hashCode);
  * @return
  */
 char *getSrKey();
+
+/**
+ * md5 加密
+ * @param env
+ * @param outStr
+ * @return
+ */
+jstring md5(JNIEnv *env, jstring outStr);
+
+/**
+ * aes 不定长加密，根据密钥自动选择长度
+ * @param env
+ * @param outArr
+ * @return
+ */
+jstring aesEcbPkcs7Encrypt(JNIEnv *env, jbyteArray outArr);
+
+/**
+ * aes 解密
+ * @param env
+ * @param inStr
+ * @return
+ */
+jbyteArray aesEcbPkcs7Decrypt(JNIEnv *env, jstring inStr);
+
+/**
+ * 检查是否有 异常 避免闪退
+ * @param env
+ * @return  JNI_OK
+ */
+jint checkException(JNIEnv *env);
 
 #endif //JNIENCRYPTION_CHECK_SIGNATURE_H

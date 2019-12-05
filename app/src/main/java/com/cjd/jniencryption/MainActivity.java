@@ -26,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("--->", "signature: " + hashCode);
         tv.setText("hashCode:" + hashCode);
         tv.setText("key:" + EncryptJNI.getSrKey());
+
+        Log.d("--->", "md5: " + EncryptJNI.pwdMD5("123456"));
+
     }
 
 }
