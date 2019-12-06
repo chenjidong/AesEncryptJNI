@@ -148,8 +148,8 @@ jint hasSignature(int hashCode) {
     return JNI_ERR;
 }
 
-char *getSrKey() {
-    char *key = "C980DAF2E1ABE8329B0335DD419F96E1";
+const char *getSrKey() {
+    const char *key = "C980DAF2E1ABE8329B0335DD419F96E1";
     return key;
 }
 

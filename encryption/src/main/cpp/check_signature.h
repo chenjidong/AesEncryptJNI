@@ -76,7 +76,7 @@ jint hasSignature(int hashCode);
  * 内置密钥
  * @return
  */
-char *getSrKey();
+const char *getSrKey();
 
 /**
  * md5 加密
