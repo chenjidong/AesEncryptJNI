@@ -109,4 +109,21 @@ jbyteArray aesEcbPkcs7Decrypt(JNIEnv *env, jstring inStr);
  */
 jint checkException(JNIEnv *env);
 
+/**
+ * 检查包名是否匹配
+ * @param env
+ * @param packageName
+ * @return
+ */
+jint checkPackageName(JNIEnv *env, jstring packageName);
+
+/**
+ * 检查签名hashCode 是否匹配
+ * @param env
+ * @param hashCode
+ * @return
+ */
+jint checkSignature(JNIEnv *env, jint hashCode);
+
+
 #endif //JNIENCRYPTION_CHECK_SIGNATURE_H

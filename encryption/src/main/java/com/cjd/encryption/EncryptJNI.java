@@ -18,17 +18,20 @@ public class EncryptJNI {
 
     /**
      * 检查包名
+     * tips：生产环境移除
      *
      * @return 1 成功
      */
-    public static native int checkPackage();
+    public static native int checkPackageName(String packageName);
 
     /**
-     * 检查 包名和签名是否正确
+     * 检查签名是否合法
+     * tips：生产环境移除
      *
-     * @return 1成功
+     * @param hashCode
+     * @return
      */
-    public static native int checkWhileList();
+    public static native int checkSignature(int hashCode);
 
     /**
      * AES加密 AES128_ECB
@@ -36,7 +39,7 @@ public class EncryptJNI {
      * @param bytes
      * @return
      */
-    public static native String encode(byte[] bytes);
+    public static native String encodeAes(byte[] bytes);
 
     /**
      * AES 解密 AES128_ECB
@@ -44,29 +47,30 @@ public class EncryptJNI {
      * @param str
      * @return UNSIGNATURE ： sign not pass .
      */
-    public static native byte[] decode(String str);
+    public static native byte[] decodeAes(String str);
 
     /**
-     * md5 加密  2次
+     * md5 加密
      *
      * @param str
      * @return
      */
-    public static native String pwdMD5(String str);
+    public static native String md5(String str);
 
     /**
      * 自定义获取key
+     *
      * @return
      */
     public static native String getSrKey();
 
 
-    public static String encrypt(String str) {
-        return encode(str.getBytes());
+    public static String encryptAes(String str) {
+        return encodeAes(str.getBytes());
     }
 
-    public static String decrypt(String str) {
-        return new String(decode(str));
+    public static String decryptAes(String str) {
+        return new String(decodeAes(str));
     }
 
 

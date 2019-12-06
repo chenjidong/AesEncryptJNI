@@ -130,7 +130,8 @@ jint checkWhiteList(JNIEnv *env) {
 
 
 jint hasPackage(const char *packageName) {
-    for (int i = 0; i < sizeof(APP_PACKAGE_NAME); ++i) {
+    int len = sizeof(APP_PACKAGE_NAME) / sizeof(APP_PACKAGE_NAME[0]);
+    for (int i = 0; i < len; ++i) {
         if (strcmp(APP_PACKAGE_NAME[i], packageName) == 0) {
             return JNI_OK;
         }
@@ -139,7 +140,8 @@ jint hasPackage(const char *packageName) {
 }
 
 jint hasSignature(int hashCode) {
-    for (int i = 0; i < sizeof(APP_SIGNATURE_HASH_CODE); ++i) {
+    int len = sizeof(APP_SIGNATURE_HASH_CODE) / sizeof(APP_SIGNATURE_HASH_CODE[0]);
+    for (int i = 0; i < len; ++i) {
         if (APP_SIGNATURE_HASH_CODE[i] == hashCode)
             return JNI_OK;
     }
@@ -200,4 +202,24 @@ jint checkException(JNIEnv *env) {
         return JNI_ERR;
     }
     return JNI_OK;
+}
+
+jint checkPackageName(JNIEnv *env, jstring packageName) {
+    const char *str = env->GetStringUTFChars(packageName, JNI_FALSE);
+
+    jint result = hasPackage(str);
+
+    env->ReleaseStringUTFChars(packageName, str);
+    checkException(env);
+
+    return result;
+}
+
+jint checkSignature(JNIEnv *env, jint hashCode) {
+    int code = hashCode;
+    jint result = hasSignature(code);
+
+    checkException(env);
+
+    return result;
 }

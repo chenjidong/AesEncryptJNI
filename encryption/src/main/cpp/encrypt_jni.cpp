@@ -18,32 +18,26 @@ jint JNI_OnLoad(JavaVM *vm, void *reserved) {
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_cjd_encryption_EncryptJNI_encode(JNIEnv *env, jclass type, jbyteArray jbArr) {
+Java_com_cjd_encryption_EncryptJNI_encodeAes(JNIEnv *env, jclass type, jbyteArray jbArr) {
     return aesEcbPkcs7Encrypt(env, jbArr);
 }
 
 extern "C"
 JNIEXPORT jbyteArray JNICALL
-Java_com_cjd_encryption_EncryptJNI_decode(JNIEnv *env, jclass type, jstring out_str) {
-    return aesEcbPkcs7Decrypt(env,out_str);
+Java_com_cjd_encryption_EncryptJNI_decodeAes(JNIEnv *env, jclass type, jstring out_str) {
+    return aesEcbPkcs7Decrypt(env, out_str);
 }
 
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_cjd_encryption_EncryptJNI_checkPackage(JNIEnv *env, jclass type) {
-    return checkPackage(env);
-}
-
-extern "C"
-JNIEXPORT jint JNICALL
-Java_com_cjd_encryption_EncryptJNI_checkWhileList(JNIEnv *env, jclass type) {
-    return checkWhiteList(env);
+Java_com_cjd_encryption_EncryptJNI_checkPackageName(JNIEnv *env, jclass type, jstring packageName) {
+    return checkPackageName(env, packageName);
 }
 
 extern "C"
 JNIEXPORT jstring JNICALL
-Java_com_cjd_encryption_EncryptJNI_pwdMD5(JNIEnv *env, jclass type, jstring out_str) {
-    return md5(env, out_str);//最后再加三个#
+Java_com_cjd_encryption_EncryptJNI_md5(JNIEnv *env, jclass type, jstring out_str) {
+    return md5(env, out_str);
 }
 
 extern "C"
@@ -51,4 +45,10 @@ JNIEXPORT jstring JNICALL
 Java_com_cjd_encryption_EncryptJNI_getSrKey(JNIEnv *env, jclass type) {
 
     return env->NewStringUTF(getSrKey());
+}
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_cjd_encryption_EncryptJNI_checkSignature(JNIEnv *env, jclass clazz, jint hash_code) {
+
+    return hasSignature(hash_code);
 }
